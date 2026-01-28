@@ -1,12 +1,10 @@
 ## Project Title
 
-GBDA302 Week 2 Example 3: Platforms (AABB Collisions)
+GBDA302 Side Quest 2
 
----
+## Name
 
-## Authors
-
-Karen Cochrane and David Han
+Yolanda Wang, q65wang, 21076725
 
 ---
 
@@ -14,17 +12,10 @@ Karen Cochrane and David Han
 
 Adds several rectangular platforms. The blob is drawn as a noisy circle but collides using a simple axis-aligned bounding box (AABB). X and Y are resolved separately to keep behaviour predictable and teachable.
 
----
+## Interatcion Notes
 
-## Learning Goals
-
-Learning Goals:
-
-- Convert a circular sprite to an AABB for collision
-- Implement overlap test and push-out resolution
-- Manage grounded state only when landing on top faces
-
----
+Change the blob color and noise factor to express the emotion.
+When blob on the ground blob shows green and regular shape to express joy, when blob in the air it shows red and irregular noise express unsteadiness.
 
 ## Assets
 
