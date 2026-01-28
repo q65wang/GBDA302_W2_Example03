@@ -112,6 +112,8 @@ function draw() {
   // --- STEP 2: Move vertically, then resolve Y collisions ---
   box.y += blob3.vy;
   blob3.onGround = false;
+  let blobColor = "";
+  let blobScale = 1;
 
   for (const s of platforms) {
     if (overlap(box, s)) {
@@ -120,10 +122,16 @@ function draw() {
         box.y = s.y - box.h;
         blob3.vy = 0;
         blob3.onGround = true;
+        //When blob on the ground, change blob color to green
+        blobColor = "green";
+        blobScale = 0;
       } else if (blob3.vy < 0) {
         // Rising → hit the underside of a platform
         box.y = s.y + s.h;
         blob3.vy = 0;
+        //When blob in the air, change blob color to red
+        blobColor = "red";
+        blobScale = 1;
       }
     }
   }
@@ -137,7 +145,7 @@ function draw() {
 
   // --- Draw the animated blob ---
   blob3.t += blob3.tSpeed;
-  drawBlobCircle(blob3);
+  drawBlobCircle(blob3, blobColor, blobScale);
 
   // --- HUD ---
   fill(0);
@@ -153,8 +161,14 @@ function overlap(a, b) {
 }
 
 // Draws the blob using Perlin noise for a soft, breathing effect
-function drawBlobCircle(b) {
-  fill(20, 120, 255);
+function drawBlobCircle(b, color, scale) {
+  //add blob's color status & noise factor
+  if (color == "green") {
+    fill(0, 255, 0);
+  } else {
+    fill(255, 0, 0);
+  }
+
   beginShape();
 
   for (let i = 0; i < b.points; i++) {
@@ -162,8 +176,8 @@ function drawBlobCircle(b) {
 
     // Noise-based radius offset
     const n = noise(
-      cos(a) * b.wobbleFreq + 100,
-      sin(a) * b.wobbleFreq + 100,
+      scale * cos(a) * b.wobbleFreq + 100, //increase the size of the noise
+      scale * sin(a) * b.wobbleFreq + 100, //increase the size of the noise
       b.t,
     );
 
